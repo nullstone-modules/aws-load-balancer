@@ -3,7 +3,7 @@ module "cert" {
   enabled = var.enable_https
 
   domain = {
-    name    = local.subdomain_fqdn
+    name    = local.subdomain_name
     zone_id = local.subdomain_zone_id
   }
 
