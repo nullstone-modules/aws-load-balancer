@@ -31,7 +31,3 @@ locals {
   cert_arn          = try(data.ns_connection.subdomain.outputs.cert_arn, "")
   subdomain_zone_id = try(data.ns_connection.subdomain.outputs.zone_id, "")
 }
-
-data "aws_ecs_cluster" "cluster" {
-  cluster_name = data.ns_connection.cluster.outputs.cluster_name
-}
