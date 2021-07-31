@@ -1,17 +1,17 @@
+variable "service_port" {
+  description = "The load balancer will forward to this port on your service"
+  type        = number
+  default     = 80
+}
+
 variable "enable_https" {
   description = "Enable this to serve up HTTPS traffic. Requires subdomain connection."
   type        = bool
   default     = true
 }
 
-variable "enable_access_logs" {
-  description = "Enable this to log all traffic to an s3 bucket"
-  type        = bool
-  default     = false
-}
-
 variable "health_check" {
-  description = "Configuration for health checking the target group attached to the load balancer"
+  description = "Enable and configure health checking for the service from the load balancer."
   type = object({
     enabled : bool
     path : string

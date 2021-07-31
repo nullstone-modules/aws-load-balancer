@@ -1,3 +1,15 @@
+module "cert" {
+  source  = "nullstone-modules/sslcert/aws"
+  enabled = var.enable_https
+
+  domain = {
+    name    = local.subdomain_fqdn
+    zone_id = local.subdomain_zone_id
+  }
+
+  tags = data.ns_workspace.this.tags
+}
+
 resource "aws_lb_listener" "http-redirect-to-https" {
   count = var.enable_https ? 1 : 0
 
@@ -23,7 +35,7 @@ resource "aws_lb_listener" "https" {
   protocol          = "HTTPS"
   port              = 443
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
-  certificate_arn   = local.cert_arn
+  certificate_arn   = module.cert.certificate_arn
 
   default_action {
     type             = "forward"
