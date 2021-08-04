@@ -1,3 +1,13 @@
+variable "app_metadata" {
+  description = <<EOF
+App Metadata is injected from the app on-the-fly.
+This contains information about resources created in the app module that are needed by the capability.
+EOF
+  
+  type    = map(string)
+  default = {}
+}
+
 variable "service_port" {
   description = "The load balancer will forward to this port on your service"
   type        = number
