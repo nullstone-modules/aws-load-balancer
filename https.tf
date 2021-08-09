@@ -1,5 +1,6 @@
 module "cert" {
   source  = "nullstone-modules/sslcert/aws"
+  version = "~> 0.3.0"
   enabled = var.enable_https
 
   domain = {
