@@ -10,7 +10,7 @@ output "load_balancers" {
 locals {
   protocol         = var.enable_https ? lower(aws_lb_listener.https[0].protocol) : lower(aws_lb_listener.http[0].protocol)
   port             = var.enable_https ? aws_lb_listener.https[0].port : aws_lb_listener.http[0].port
-  lb_subdomain     = [aws_lb.this.dns_name]
+  lb_subdomain     = aws_lb.this.dns_name
   lb_url           = "${local.protocol}://${local.lb_subdomain}:${local.port}"
   vanity_subdomain = try(trimsuffix(aws_route53_record.alias[0].fqdn, "."), "")
   vanity_url       = "${local.protocol}://${local.vanity_subdomain}:${local.port}"
