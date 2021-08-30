@@ -8,12 +8,6 @@ EOF
   default = {}
 }
 
-variable "service_port" {
-  description = "The load balancer will forward to this port on your service"
-  type        = number
-  default     = 80
-}
-
 variable "enable_https" {
   description = "Enable this to serve up HTTPS traffic. Requires subdomain connection."
   type        = bool

@@ -1,6 +1,6 @@
 resource "aws_lb_target_group" "this" {
   name                 = local.resource_name
-  port                 = var.service_port
+  port                 = var.app_metadata["service_port"]
   protocol             = "HTTP"
   target_type          = "ip"
   vpc_id               = local.vpc_id
