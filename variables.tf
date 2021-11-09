@@ -3,7 +3,7 @@ variable "app_metadata" {
 App Metadata is injected from the app on-the-fly.
 This contains information about resources created in the app module that are needed by the capability.
 EOF
-  
+
   type    = map(string)
   default = {}
 }
@@ -22,8 +22,10 @@ variable "health_check" {
     matcher : string
   })
   default = {
-    enabled = true
-    path    = "/"
-    matcher = "200-499"
+    enabled           = true
+    path              = "/"
+    matcher           = "200-499"
+    healthy_threshold = 2
+    interval          = 5
   }
 }
