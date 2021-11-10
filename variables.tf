@@ -20,6 +20,8 @@ variable "health_check" {
     enabled : bool
     path : string
     matcher : string
+    healthy_threshold : number
+    interval : number
   })
   default = {
     enabled           = true
