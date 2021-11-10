@@ -22,6 +22,7 @@ variable "health_check" {
     matcher : string
     healthy_threshold : number
     interval : number
+    timeout : number
   })
   default = {
     enabled           = true
@@ -29,5 +30,11 @@ variable "health_check" {
     matcher           = "200-499"
     healthy_threshold = 2
     interval          = 5
+    timeout           = 4
+  }
+
+  validation {
+    condition     = var.health_check.interval > var.health_check.timeout
+    error_message = "Interval (time between health checks) must be greater than the Timeout (time waiting for a single request)"
   }
 }

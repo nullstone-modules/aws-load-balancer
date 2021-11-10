@@ -13,5 +13,6 @@ resource "aws_lb_target_group" "this" {
     enabled           = var.health_check.enabled
     path              = var.health_check.path
     matcher           = var.health_check.matcher
+    timeout           = var.health_check.timeout
   }
 }
