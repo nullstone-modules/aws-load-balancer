@@ -16,20 +16,24 @@ resource "aws_s3_bucket_lifecycle_configuration" "default" {
   bucket = aws_s3_bucket.default.bucket
 
   rule {
-    enabled                                = true
-    abort_incomplete_multipart_upload_days = 5
+    id     = "log"
+    status = "Enabled"
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 5
+    }
 
     expiration {
       days = 90
     }
 
     noncurrent_version_expiration {
-      days = 90
+      noncurrent_days = 90
     }
 
     noncurrent_version_transition {
-      days          = 30
-      storage_class = "GLACIER"
+      noncurrent_days = 30
+      storage_class   = "GLACIER"
     }
 
     transition {
