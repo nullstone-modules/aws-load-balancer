@@ -1,8 +1,6 @@
 resource "aws_s3_bucket" "default" {
   bucket        = var.name
-  acl           = "log-delivery-write"
   force_destroy = var.force_destroy
-  policy        = data.aws_iam_policy_document.default.json
   tags          = merge({ Name : var.name }, var.tags)
 }
 
