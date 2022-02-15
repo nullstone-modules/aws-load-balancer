@@ -1,41 +1,27 @@
-data "aws_elb_service_account" "default" {}
+resource "aws_s3_bucket" "default" {
+  bucket        = var.name
+  force_destroy = var.force_destroy
+  tags          = merge({ Name : var.name }, var.tags)
+}
 
-data "aws_iam_policy_document" "default" {
-  statement {
-    sid = ""
+resource "aws_s3_bucket_versioning" "default" {
+  bucket = aws_s3_bucket.default.id
 
-    principals {
-      type        = "AWS"
-      identifiers = [join("", data.aws_elb_service_account.default.*.arn)]
-    }
-
-    effect = "Allow"
-
-    actions = [
-      "s3:PutObject",
-    ]
-
-    resources = [
-      "arn:aws:s3:::${var.name}/*",
-    ]
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
-resource "aws_s3_bucket" "default" {
-  bucket        = var.name
-  acl           = "log-delivery-write"
-  force_destroy = var.force_destroy
-  policy        = data.aws_iam_policy_document.default.json
+resource "aws_s3_bucket_lifecycle_configuration" "default" {
+  bucket = aws_s3_bucket.default.bucket
 
-  tags = merge({ Name : var.name }, var.tags)
-
-  versioning {
-    enabled = true
-  }
-
-  lifecycle_rule {
+  rule {
     enabled                                = true
     abort_incomplete_multipart_upload_days = 5
+
+    expiration {
+      days = 90
+    }
 
     noncurrent_version_expiration {
       days = 90
@@ -55,26 +41,15 @@ resource "aws_s3_bucket" "default" {
       days          = 60
       storage_class = "GLACIER"
     }
-
-    expiration {
-      days = 90
-    }
-  }
-
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "default" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   bucket = aws_s3_bucket.default.id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
 }
