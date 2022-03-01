@@ -7,6 +7,10 @@ resource "aws_lb_target_group" "this" {
   deregistration_delay = 10
   tags                 = data.ns_workspace.this.tags
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   health_check {
     interval          = var.health_check.interval
     healthy_threshold = var.health_check.healthy_threshold
