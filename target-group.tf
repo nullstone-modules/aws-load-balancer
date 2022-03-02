@@ -1,11 +1,15 @@
 resource "aws_lb_target_group" "this" {
-  name                 = local.resource_name
+  name                 = "${local.resource_name}-${var.app_metadata["service_port"]}"
   port                 = var.app_metadata["service_port"]
   protocol             = "HTTP"
   target_type          = "ip"
   vpc_id               = local.vpc_id
   deregistration_delay = 10
   tags                 = data.ns_workspace.this.tags
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   health_check {
     interval          = var.health_check.interval
