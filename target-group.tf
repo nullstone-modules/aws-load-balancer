@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "this" {
-  name                 = local.resource_name
+  name                 = "${local.resource_name}-${var.app_metadata["service_port"]}"
   port                 = var.app_metadata["service_port"]
   protocol             = "HTTP"
   target_type          = "ip"
