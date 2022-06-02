@@ -8,30 +8,17 @@ terraform {
 
 data "ns_workspace" "this" {}
 
-// Container apps have clusters, but lambdas do not
-// If app does not have cluster, resulting `name` equals `""`
-// This allows the `via` in the network stanza to work as if the cluster did not exist
-data "ns_app_connection" "cluster" {
-  name     = "cluster"
-  type     = "cluster/aws-fargate"
-  optional = true
-}
-
-data "ns_app_connection" "network" {
-  name = "network"
-  type = "network/aws"
-  via  = data.ns_app_connection.cluster.name
-}
-
-data "ns_connection" "subdomain" {
-  name     = "subdomain"
-  type     = "subdomain/aws"
-  optional = !var.enable_https
+// Generate a random suffix to ensure uniqueness of resources
+resource "random_string" "resource_suffix" {
+  length  = 5
+  lower   = true
+  upper   = false
+  number  = false
+  special = false
 }
 
 locals {
-  vpc_id            = data.ns_app_connection.network.outputs.vpc_id
-  subnet_ids        = data.ns_app_connection.network.outputs.public_subnet_ids
-  subdomain_name    = trimsuffix(try(data.ns_connection.subdomain.outputs.fqdn, ""), ".")
-  subdomain_zone_id = try(data.ns_connection.subdomain.outputs.zone_id, "")
+  tags          = data.ns_workspace.this.tags
+  block_name    = data.ns_workspace.this.block_name
+  resource_name = "${data.ns_workspace.this.block_ref}-${random_string.resource_suffix.result}"
 }

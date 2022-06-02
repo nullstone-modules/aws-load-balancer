@@ -5,7 +5,7 @@ resource "aws_lb_target_group" "this" {
   target_type          = "ip"
   vpc_id               = local.vpc_id
   deregistration_delay = 10
-  tags                 = data.ns_workspace.this.tags
+  tags                 = local.tags
 
   lifecycle {
     create_before_destroy = true

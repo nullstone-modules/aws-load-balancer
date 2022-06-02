@@ -1,7 +1,7 @@
 variable "app_metadata" {
   description = <<EOF
-App Metadata is injected from the app on-the-fly.
-This contains information about resources created in the app module that are needed by the capability.
+Nullstone automatically injects metadata from the app module into this module through this variable.
+This variable is a reserved variable for capabilities.
 EOF
 
   type    = map(string)

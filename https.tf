@@ -8,7 +8,7 @@ module "cert" {
     zone_id = local.subdomain_zone_id
   }
 
-  tags = data.ns_workspace.this.tags
+  tags = local.tags
 }
 
 resource "aws_lb_listener" "http-redirect-to-https" {
@@ -37,6 +37,7 @@ resource "aws_lb_listener" "https" {
   port              = 443
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
   certificate_arn   = module.cert.certificate_arn
+  tags              = local.tags
 
   default_action {
     type             = "forward"

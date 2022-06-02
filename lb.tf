@@ -6,7 +6,7 @@ resource "aws_lb" "this" {
   security_groups    = [aws_security_group.lb.id]
   enable_http2       = true
   ip_address_type    = "ipv4"
-  tags               = data.ns_workspace.this.tags
+  tags               = local.tags
 
   access_logs {
     bucket  = module.logs_bucket.bucket_id

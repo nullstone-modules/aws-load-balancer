@@ -1,6 +1,6 @@
 module "logs_bucket" {
   source        = "./logs_bucket"
   name          = local.resource_name
-  tags          = data.ns_workspace.this.tags
+  tags          = local.tags
   force_destroy = true
 }

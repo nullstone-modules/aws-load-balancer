@@ -1,7 +1,7 @@
 resource "aws_security_group" "lb" {
   name   = "${local.resource_name}/lb"
   vpc_id = local.vpc_id
-  tags   = merge(data.ns_workspace.this.tags, { Name = "${local.resource_name}/lb" })
+  tags   = merge(local.tags, { Name = "${local.resource_name}/lb" })
 }
 
 // This rule is always enabled; when we are listening on https, we still want to force http to https through redirect

@@ -1,0 +1,12 @@
+org_name: nullstone
+name: aws-load-balancer
+friendly_name: Load Balancer
+description: Creates a Load Balancer for use with http/https services
+category: capability/public-entry
+type: load-balancer/aws
+appCategories:
+    - app/container
+layer: service
+is_public: true
+provider_types:
+    - aws
