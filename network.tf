@@ -4,13 +4,15 @@
 data "ns_app_connection" "cluster" {
   name     = "cluster"
   type     = "cluster/aws-fargate"
+  contract = "cluster/aws/ecs:fargate"
   optional = true
 }
 
 data "ns_app_connection" "network" {
-  name = "network"
-  type = "network/aws"
-  via  = data.ns_app_connection.cluster.name
+  name     = "network"
+  type     = "network/aws"
+  contract = "network/aws/vpc"
+  via      = data.ns_app_connection.cluster.name
 }
 
 locals {
