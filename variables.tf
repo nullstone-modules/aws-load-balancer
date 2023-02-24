@@ -21,16 +21,18 @@ variable "health_check" {
     path : string
     matcher : string
     healthy_threshold : number
+    unhealthy_threshold : number
     interval : number
     timeout : number
   })
   default = {
-    enabled           = true
-    path              = "/"
-    matcher           = "200-499"
-    healthy_threshold = 2
-    interval          = 5
-    timeout           = 4
+    enabled             = true
+    path                = "/"
+    matcher             = "200-499"
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    interval            = 5
+    timeout             = 4
   }
 
   validation {
