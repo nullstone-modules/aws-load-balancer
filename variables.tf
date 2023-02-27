@@ -56,6 +56,11 @@ variable health_check_timeout {
   default     = 4
 }
 
-locals {
-  validate_health_check_interval = var.health_check_interval > var.health_check_timeout ? true : tobool("health_check_interval must be greater than the health_check_timeout.")
+data "validation_error" "health_check_interval" {
+  condition  = var.health_check_interval <= var.health_check_timeout
+  summary = "health_check_interval must be greater than the health_check_timeout."
+  details = <<EOF
+For more details about configuring health checks on an AWS Load Balancer, see the AWS documentation:
+https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html
+EOF
 }
