@@ -4,6 +4,14 @@ resource "aws_s3_bucket" "default" {
   tags          = merge({ Name : var.name }, var.tags)
 }
 
+resource "aws_s3_bucket_ownership_controls" "default" {
+  bucket = aws_s3_bucket.default.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_versioning" "default" {
   bucket = aws_s3_bucket.default.id
 
