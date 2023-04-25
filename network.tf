@@ -1,18 +1,18 @@
-// Container apps have clusters, but lambdas do not
-// If app does not have cluster, resulting `name` equals `""`
-// This allows the `via` in the network stanza to work as if the cluster did not exist
+data "ns_app_connection" "cluster_namespace" {
+  name     = "cluster-namespace"
+  contract = "cluster-namespace/aws/ecs:*"
+}
+
 data "ns_app_connection" "cluster" {
   name     = "cluster"
-  type     = "cluster/aws-fargate"
-  contract = "cluster/aws/ecs:fargate"
-  optional = true
+  contract = "cluster/aws/ecs:*"
+  via      = data.ns_app_connection.cluster_namespace.name
 }
 
 data "ns_app_connection" "network" {
   name     = "network"
-  type     = "network/aws"
   contract = "network/aws/vpc"
-  via      = data.ns_app_connection.cluster.name
+  via      = "${data.ns_app_connection.cluster_namespace.name}/${data.ns_app_connection.cluster.name}"
 }
 
 locals {
