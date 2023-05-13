@@ -1,6 +1,6 @@
 org_name: nullstone
 name: aws-load-balancer
-friendly_name: Load Balancer
+friendly_name: HTTP Load Balancer
 description: Creates a Load Balancer for use with http/https services
 category: capability
 subcategory: ingress
