@@ -40,6 +40,8 @@ AWS supports duration-based and application-based sticky sessions.
 In both scenarios, a cookie is set that your browser transmits back to the load balancer. 
 The load balancer uses that cookie to determine which target to relay the request.
 
+See more at https://docs.aws.amazon.com/elasticloadbalancing/latest/application/sticky-sessions.html
+
 ### Duration-based
 
 How to configure with 12-hour expiration:
