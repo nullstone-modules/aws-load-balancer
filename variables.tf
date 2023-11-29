@@ -64,3 +64,53 @@ For more details about configuring health checks on an AWS Load Balancer, see th
 https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html
 EOF
 }
+
+variable sticky_session_type {
+  type        = string
+  default     = "off"
+  description = <<EOF
+Enable sticky sessions by setting this to 'duration' or 'application'.
+See more at  https://docs.aws.amazon.com/elasticloadbalancing/latest/application/sticky-sessions.html.
+
+Available choices: 'off', 'duration', 'application'
+By default, sticky sessions are 'off'.
+EOF
+
+  validation {
+    condition     = contains(["off", "duration", "application"], var.sticky_session_type)
+    error_message = "sticky_session_type must be 'off', 'duration', or 'application'"
+  }
+}
+
+variable sticky_session_duration {
+  type        = number
+  default     = 86400
+  description = <<EOF
+When duration-based sticky sessions are enabled, this configures the expiration on a sticky session.
+This value is represented in number of seconds with a range of 1 second to 1 week (604800 seconds).
+The default value is 1 day (86400 seconds).
+
+See more at https://docs.aws.amazon.com/elasticloadbalancing/latest/application/sticky-sessions.html#duration-based-stickiness.
+EOF
+
+  validation {
+    condition     = var.sticky_session_duration >= 1 && var.sticky_session_duration <= 604800
+    error_message = "sticky_session_duration must be at least 1 second and less than 604800 seconds (1 week)"
+  }
+}
+
+variable sticky_session_cookie_name {
+  type        = string
+  default     = ""
+  description = <<EOF
+When application-based sticky sessions are enabled, this configures the name of the cookie that tracks the sticky session.
+This requires your application to set a cookie on a server request to track which requests should stick to that server.
+
+See more at https://docs.aws.amazon.com/elasticloadbalancing/latest/application/sticky-sessions.html#application-based-stickiness.
+EOF
+
+  validation {
+    condition     = !contains(["AWSALB", "AWSALBAPP", "AWSALBTG"], var.sticky_session_cookie_name)
+    error_message = "The following cookie names are reserved for AWS and invalid: 'AWSALB', 'AWSALBAPP', 'AWSALBTG'."
+  }
+}
