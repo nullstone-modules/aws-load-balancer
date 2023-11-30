@@ -101,7 +101,7 @@ EOF
 
 variable sticky_session_cookie_name {
   type        = string
-  default     = ""
+  default     = "STICKY_SESSION"
   description = <<EOF
 When application-based sticky sessions are enabled, this configures the name of the cookie that tracks the sticky session.
 This requires your application to set a cookie on a server request to track which requests should stick to that server.
