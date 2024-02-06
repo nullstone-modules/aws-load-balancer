@@ -1,3 +1,6 @@
+# 0.5.2 (Feb 06, 2024)
+* Added initial metrics.
+
 # 0.5.1 (Nov 30, 2023)
 * Added support for sticky sessions.
 

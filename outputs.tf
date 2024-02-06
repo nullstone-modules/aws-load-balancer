@@ -25,3 +25,14 @@ output "public_urls" {
     }
   ]
 }
+
+output "metrics" {
+  value = [
+    for m in local.metrics : {
+      name     = m.name
+      type     = m.type
+      unit     = m.unit
+      mappings = jsonencode(m.mappings)
+    }
+  ]
+}
