@@ -1,3 +1,6 @@
+# 0.5.3 (Mar 19, 2024)
+* Upgrade terraform providers and locked with `.terraform.lock.hcl`.
+
 # 0.5.2 (Feb 06, 2024)
 * Added initial metrics.
 
