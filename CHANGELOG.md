@@ -1,3 +1,6 @@
+# 0.5.4 (Apr 03, 2024)
+* Added vars for `desync_mitigation_mode` and `drop_invalid_header_fields`.
+
 # 0.5.3 (Mar 19, 2024)
 * Upgrade terraform providers and locked with `.terraform.lock.hcl`.
 
