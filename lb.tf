@@ -8,6 +8,9 @@ resource "aws_lb" "this" {
   ip_address_type    = "ipv4"
   tags               = local.tags
 
+  desync_mitigation_mode     = var.desync_mitigation_mode
+  drop_invalid_header_fields = var.drop_invalid_header_fields
+
   access_logs {
     bucket  = module.logs_bucket.bucket_id
     enabled = true

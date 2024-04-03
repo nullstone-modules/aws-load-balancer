@@ -114,3 +114,28 @@ EOF
     error_message = "The following cookie names are reserved for AWS and invalid: 'AWSALB', 'AWSALBAPP', 'AWSALBTG'."
   }
 }
+
+variable "desync_mitigation_mode" {
+  type        = string
+  default     = "defensive"
+  description = <<EOF
+Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync.
+Valid values are monitor, defensive (default), strictest.
+See more at [config-desync-mitigation-mode](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-desync-mitigation-mode.html).
+EOF
+
+  validation {
+    condition     = contains(["monitor", "defensive", "strictest"], var.desync_mitigation_mode)
+    error_message = "desync_mitigation_mode must be one of 'monitor', 'defensive', or 'strictest'."
+  }
+}
+
+variable "drop_invalid_header_fields" {
+  type        = bool
+  default     = false
+  description = <<EOF
+Indicates whether HTTP headers with header fields that are not valid are removed by the load balancer (true) or routed to targets (false).
+The default is false.
+Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens.
+EOF
+}
