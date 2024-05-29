@@ -1,3 +1,6 @@
+# 0.5.5 (Apr 29, 2024)
+* Added `idle_timeout` variable.
+
 # 0.5.4 (Apr 03, 2024)
 * Added vars for `desync_mitigation_mode` and `drop_invalid_header_fields`.
 

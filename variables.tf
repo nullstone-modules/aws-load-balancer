@@ -139,3 +139,12 @@ The default is false.
 Elastic Load Balancing requires that message header names contain only alphanumeric characters and hyphens.
 EOF
 }
+
+variable "idle_timeout" {
+  type        = number
+  default     = 60
+  description = <<EOF
+Time in seconds that the connection is allowed to be idle.
+Default: 60.
+EOF
+}

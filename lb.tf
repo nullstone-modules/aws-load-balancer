@@ -10,6 +10,7 @@ resource "aws_lb" "this" {
 
   desync_mitigation_mode     = var.desync_mitigation_mode
   drop_invalid_header_fields = var.drop_invalid_header_fields
+  idle_timeout               = var.idle_timeout
 
   access_logs {
     bucket  = module.logs_bucket.bucket_id
