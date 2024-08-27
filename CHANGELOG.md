@@ -1,3 +1,6 @@
+# 0.5.6 (Aug 27, 2024)
+* Added load balancer name to metrics chart names.
+
 # 0.5.5 (Apr 29, 2024)
 * Added `idle_timeout` variable.
 
