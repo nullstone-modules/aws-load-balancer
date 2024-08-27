@@ -4,9 +4,11 @@ locals {
     "TargetGroup"  = aws_lb_target_group.this.arn_suffix
   })
 
+  metric_name_prefix = "load-balancer/${random_string.resource_suffix.result}"
+
   metrics = [
     {
-      name = "hosts"
+      name = "${local.metric_name_prefix}/hosts"
       type = "generic"
       unit = "count"
 
@@ -28,7 +30,7 @@ locals {
       }
     },
     {
-      name = "requests"
+      name = "${local.metric_name_prefix}/requests"
       type = "generic"
       unit = "count"
 
@@ -57,7 +59,7 @@ locals {
       }
     },
     {
-      name = "response"
+      name = "${local.metric_name_prefix}/response"
       type = "duration"
       unit = "seconds"
 
