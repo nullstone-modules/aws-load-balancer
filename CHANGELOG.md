@@ -1,3 +1,6 @@
+# 0.5.7 (Mar 31, 2025)
+* Use SSL certificate from connected subdomain if it created one.
+
 # 0.5.6 (Aug 27, 2024)
 * Added load balancer name to metrics chart names.
 
