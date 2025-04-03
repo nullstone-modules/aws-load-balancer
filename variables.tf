@@ -148,3 +148,16 @@ Time in seconds that the connection is allowed to be idle.
 Default: 60.
 EOF
 }
+
+variable "ip_whitelist" {
+  type        = list(string)
+  default     = []
+  description = <<EOF
+Specify a list of source IP addresses that can reach this load balancer.
+If null or empty, this load balancer allows any IP address to access it.
+EOF
+}
+
+locals {
+  allow_ips = (var.ip_whitelist == null || length(var.ip_whitelist) == 0) ? ["0.0.0.0/0"] : var.ip_whitelist
+}

@@ -7,7 +7,7 @@ resource "aws_security_group" "lb" {
 // This rule is always enabled; when we are listening on https, we still want to force http to https through redirect
 resource "aws_security_group_rule" "lb-http-from-world" {
   security_group_id = aws_security_group.lb.id
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = local.allow_ips
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 80

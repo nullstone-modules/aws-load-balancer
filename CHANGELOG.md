@@ -1,3 +1,6 @@
+# 0.5.8 (Apr 03, 2025)
+* Added support for optional IP whitelist (`var.ip_whitelist`).
+
 # 0.5.7 (Mar 31, 2025)
 * Use SSL certificate from connected subdomain if it created one.
 
