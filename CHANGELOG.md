@@ -1,3 +1,6 @@
+# 0.5.12 (Apr 06, 2025)
+* Set load balancer to internal when not publicly accessible.
+
 # 0.5.11 (Apr 06, 2025)
 * Emit `private_urls` instead of `public_urls` from outputs when not publicly accessible.
 

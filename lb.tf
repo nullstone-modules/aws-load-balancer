@@ -1,6 +1,6 @@
 resource "aws_lb" "this" {
   name               = local.resource_name
-  internal           = false
+  internal           = !var.is_publicly_accessible
   load_balancer_type = "application"
   subnets            = local.subnet_ids
   security_groups    = [aws_security_group.lb.id]
