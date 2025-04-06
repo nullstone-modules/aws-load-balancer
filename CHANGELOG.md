@@ -1,4 +1,7 @@
-# 0.5.9 (Apr 06, 2025)
+# 0.5.11 (Apr 06, 2025)
+* Emit `private_urls` instead of `public_urls` from outputs when not publicly accessible.
+
+# 0.5.10 (Apr 06, 2025)
 * Added support for private load balancer via `var.is_publicly_accessible`.
 
 # 0.5.8 (Apr 03, 2025)

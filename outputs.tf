@@ -14,16 +14,22 @@ locals {
   lb_url           = "${local.protocol}://${local.lb_subdomain}:${local.port}"
   vanity_subdomain = try(trimsuffix(aws_route53_record.alias[0].fqdn, "."), "")
   vanity_url       = "${local.protocol}://${local.vanity_subdomain}:${local.port}"
-}
 
-output "public_urls" {
-  value = [
+  urls = [
     {
       // Technically, we should always be able to hit the load balancer url directly
       // Let's return the vanity URL if we have one so the user is set up for success
       url = local.subdomain_zone_id != "" ? local.vanity_url : local.lb_url
     }
   ]
+}
+
+output "public_urls" {
+  value = var.is_publicly_accessible ? local.urls : []
+}
+
+output "private_urls" {
+  value = !var.is_publicly_accessible ? local.urls : []
 }
 
 output "metrics" {
