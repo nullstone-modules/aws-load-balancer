@@ -1,3 +1,6 @@
+# 0.5.9 (Apr 06, 2025)
+* Added support for private load balancer via `var.is_publicly_accessible`.
+
 # 0.5.8 (Apr 03, 2025)
 * Added support for optional IP whitelist (`var.ip_whitelist`).
 

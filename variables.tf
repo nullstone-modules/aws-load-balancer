@@ -161,3 +161,9 @@ EOF
 locals {
   allow_ips = (var.ip_whitelist == null || length(var.ip_whitelist) == 0) ? ["0.0.0.0/0"] : var.ip_whitelist
 }
+
+variable "is_publicly_accessible" {
+  type        = bool
+  default     = true
+  description = "Disable to remove internet access to this load balancer (only accessible in the private network)"
+}

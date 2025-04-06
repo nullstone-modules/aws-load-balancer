@@ -33,10 +33,21 @@ resource "aws_lb_listener" "https" {
 }
 
 resource "aws_security_group_rule" "lb-https-from-world" {
-  count = var.enable_https ? 1 : 0
+  count = var.enable_https && var.is_publicly_accessible ? 1 : 0
 
   security_group_id = aws_security_group.lb.id
   cidr_blocks       = local.allow_ips
+  type              = "ingress"
+  protocol          = "tcp"
+  from_port         = 443
+  to_port           = 443
+}
+
+resource "aws_security_group_rule" "lb-https-from-vpc" {
+  count = var.enable_https && !var.is_publicly_accessible ? 1 : 0
+
+  security_group_id = aws_security_group.lb.id
+  cidr_blocks       = [local.vpc_cidr]
   type              = "ingress"
   protocol          = "tcp"
   from_port         = 443
