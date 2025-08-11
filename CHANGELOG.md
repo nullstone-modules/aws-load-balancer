@@ -1,3 +1,6 @@
+# 0.6.0 (Aug 11, 2025)
+* Upgraded Load Balancer'sSSL policy to `ELBSecurityPolicy-TLS13-1-2-Res-2021-06`.
+
 # 0.5.12 (Apr 06, 2025)
 * Set load balancer to internal when not publicly accessible.
 
