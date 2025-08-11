@@ -16,13 +16,17 @@ resource "aws_lb_listener" "http-redirect-to-https" {
   }
 }
 
+locals {
+  ssl_policy = "ELBSecurityPolicy-TLS13-1-2-Res-2021-06"
+}
+
 resource "aws_lb_listener" "https" {
   count = var.enable_https ? 1 : 0
 
   load_balancer_arn = aws_lb.this.arn
   protocol          = "HTTPS"
   port              = 443
-  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
+  ssl_policy        = local.ssl_policy
   certificate_arn   = local.certificate_arn
   tags              = local.tags
 
