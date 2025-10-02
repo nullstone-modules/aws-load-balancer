@@ -167,3 +167,14 @@ variable "is_publicly_accessible" {
   default     = true
   description = "Disable to remove internet access to this load balancer (only accessible in the private network)"
 }
+
+variable "enable_global_accelerator" {
+  type        = bool
+  default     = false
+  description = <<EOF
+AWS Global Accelerator is a networking service that routes traffic over the AWS global network backbone instead of the public internet.
+For applications used across the globe, this can greatly improve performance, availability, and resilience.
+When enabled, this will create a global accelerator connected to this load balancer.
+NOTE: When first enabled, you will need to apply an infra update to any connected apps to update the DNS records to use the global accelerator.
+EOF
+}
