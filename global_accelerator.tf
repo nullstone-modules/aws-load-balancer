@@ -14,9 +14,9 @@ resource "aws_globalaccelerator_accelerator" "this" {
 }
 
 locals {
-  ga_arn      = var.enable_global_accelerator ? aws_globalaccelerator_accelerator.this.arn : ""
-  ga_dns_name = var.enable_global_accelerator ? aws_globalaccelerator_accelerator.this.dns_name : ""
-  ga_zone_id  = var.enable_global_accelerator ? aws_globalaccelerator_accelerator.this.hosted_zone_id : ""
+  ga_arn      = var.enable_global_accelerator ? aws_globalaccelerator_accelerator.this[0].arn : ""
+  ga_dns_name = var.enable_global_accelerator ? aws_globalaccelerator_accelerator.this[0].dns_name : ""
+  ga_zone_id  = var.enable_global_accelerator ? aws_globalaccelerator_accelerator.this[0].hosted_zone_id : ""
 }
 
 resource "aws_globalaccelerator_listener" "this_http" {
