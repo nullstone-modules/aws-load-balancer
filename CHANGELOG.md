@@ -1,5 +1,6 @@
 # 0.6.1 (Oct 02, 2025)
-* Added optional global accelerator to improve performance and availability for global applications.
+* Added an optional global accelerator to improve performance and availability for global applications.
+* Fixed an "invalid attribute" warning in logs bucket configuration.
 
 # 0.6.0 (Aug 11, 2025)
 * Upgraded Load Balancer'sSSL policy to `ELBSecurityPolicy-TLS13-1-2-Res-2021-06`.

@@ -27,6 +27,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "default" {
     id     = "log"
     status = "Enabled"
 
+    filter {}
+
     abort_incomplete_multipart_upload {
       days_after_initiation = 5
     }
