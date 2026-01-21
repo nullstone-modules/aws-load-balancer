@@ -65,6 +65,20 @@ https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks
 EOF
 }
 
+variable "deregistration_delay" {
+  type        = number
+  default     = 10
+  description = <<EOT
+Time (in seconds) that the load balancer waits before forcefully closing
+connections to a task after it is deregistered during a deployment or scale-down.
+
+During this period, the load balancer stops sending new requests to the task
+but allows in-flight requests to complete. This should be long enough to cover
+the longest expected request time and should not exceed the ECS task
+stop timeout to avoid prematurely terminated requests.
+EOT
+}
+
 variable "sticky_session_type" {
   type        = string
   default     = "off"

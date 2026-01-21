@@ -28,7 +28,7 @@ resource "aws_lb_target_group" "this" {
   protocol             = "HTTP"
   target_type          = "ip"
   vpc_id               = local.vpc_id
-  deregistration_delay = 10
+  deregistration_delay = var.deregistration_delay
   tags                 = local.tags
 
   lifecycle {

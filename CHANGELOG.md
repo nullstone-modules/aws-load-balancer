@@ -1,3 +1,6 @@
+# 0.6.2 (Jan 21, 2026)
+* Added `var.deregistration_delay` to configure allowance time for in-flight requests to complete before shutting down.
+
 # 0.6.1 (Oct 02, 2025)
 * Added an optional global accelerator to improve performance and availability for global applications.
 * Fixed an "invalid attribute" warning in logs bucket configuration.
