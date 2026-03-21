@@ -1,3 +1,6 @@
+# 0.7.0 (Mar 21, 2026)
+* Added optional `notification` connection to enable critical monitoring.
+
 # 0.6.2 (Jan 21, 2026)
 * Added `var.deregistration_delay` to configure allowance time for in-flight requests to complete before shutting down.
 

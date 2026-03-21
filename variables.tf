@@ -182,6 +182,21 @@ variable "is_publicly_accessible" {
   description = "Disable to remove internet access to this load balancer (only accessible in the private network)"
 }
 
+variable "alert_thresholds" {
+  type = object({
+    min_healthy_host_count = optional(number, 1)
+    response_time          = optional(number, 5)
+    error_5xx_count        = optional(number, 10)
+  })
+  default     = {}
+  description = <<EOF
+Thresholds for CloudWatch alarms on the load balancer. Only active when a notification connection is provided.
+- min_healthy_host_count: Alarm fires when healthy hosts drop below this count (default: 1). Only tracks hosts that were previously healthy, so new containers starting up won't trigger false alarms.
+- response_time: Average response time in seconds to trigger alarm (default: 5s)
+- error_5xx_count: Number of 5xx errors in a 5-minute period to trigger alarm (default: 10)
+EOF
+}
+
 variable "enable_global_accelerator" {
   type        = bool
   default     = false
