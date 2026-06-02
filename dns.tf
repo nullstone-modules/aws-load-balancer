@@ -4,7 +4,7 @@ locals {
 }
 
 resource "aws_route53_record" "alias" {
-  count = local.subdomain_zone_id != "" ? 1 : 0
+  count = local.subdomain_zone_id != "" && !var.manual_dns ? 1 : 0
 
   zone_id = local.subdomain_zone_id
   name    = ""

@@ -197,6 +197,16 @@ Thresholds for CloudWatch alarms on the load balancer. Only active when a notifi
 EOF
 }
 
+variable "manual_dns" {
+  type        = bool
+  default     = false
+  description = <<EOF
+Enable this to manage the subdomain DNS record manually instead of having this module create it.
+When true, the module will not create the alias A record pointing at the load balancer (or global accelerator).
+This is useful when the subdomain requires a routing policy (e.g. geolocation) that this module does not support.
+EOF
+}
+
 variable "enable_global_accelerator" {
   type        = bool
   default     = false

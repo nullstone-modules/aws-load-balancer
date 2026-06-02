@@ -1,3 +1,6 @@
+# 0.7.1 (Jun 01, 2026)
+* Added `var.manual_dns` to skip creating the subdomain alias record when the DNS record is managed manually (e.g. for unsupported routing policies like geolocation).
+
 # 0.7.0 (Mar 21, 2026)
 * Added optional `notification` connection to enable critical monitoring.
 

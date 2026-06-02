@@ -13,7 +13,7 @@ locals {
   lb_subdomain     = aws_lb.this.dns_name
   lb_url           = "${local.protocol}://${local.lb_subdomain}:${local.port}"
   accelerator_url  = "${local.protocol}://${local.ga_dns_name}:${local.port}"
-  vanity_subdomain = try(trimsuffix(aws_route53_record.alias[0].fqdn, "."), "")
+  vanity_subdomain = try(trimsuffix(aws_route53_record.alias[0].fqdn, "."), local.subdomain_name)
   vanity_url       = "${local.protocol}://${local.vanity_subdomain}:${local.port}"
 
   urls = [
